@@ -1,0 +1,454 @@
+
+/*------------------- DESIGN FOR THE BUTTONS ------------------- */
+
+
+input.myBtn:hover{
+    color: #FFFFFF;
+}
+
+.myBtn{
+	background-color:#34427f; /* #232e5a #6b89ff  #3C455C*/
+	color:#FFFFFF;
+    min-width: 3.2em;
+    display: inline-block;
+}
+
+.button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+.centered_btn_container {
+    display: flex; /* Enables CSS flexbox */
+    justify-content: center; /* Centers horizontally */
+    align-content: center; /* Centers vertically */
+
+    justify-items: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+
+    width: 100%;
+}
+
+.extremities_btn_container {
+    display: flex;  /* Enables CSS flexbox */
+    justify-content: space-between; /* spaces out elements as much as possible */
+}
+
+.left-wrapper,
+.right-wrapper {
+  display: inline-block;
+}
+
+.right-wrapper {
+    position: absolute;
+    right: 0;
+}
+
+#FinalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#move_on_button{
+  background-color: #990d06;
+  color: #FFFFFF;
+  min-width: 3.2em;
+  display: inline-block;
+}
+
+/* link that looks like a button - This selector applies styles only to <a> tags inside the #FinalButton container */
+#FinalButton a {
+  background-color: #34427f;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px; /* Optional: Makes the button corners rounded */
+}
+
+#FinalButton a:hover {
+  background-color: #0056b3; /* Darker background on hover */
+}
+
+/*------------------- DESIGN FOR THE MAIN CONTAINTER ; --------------------*/
+body {
+  background-color: #93b19b;
+	/* other candidates:#FBFBFF #DDE2E3, #ebebec  #F4EDED*/
+}
+
+ul {
+  padding: 0em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+ul li
+{
+  margin-bottom: 1.15em;
+}
+
+#Cont {
+	background-color: #FFFFFF;
+	border: 1px solid  #ababab; 	/* other candidates: #ababab #3C455C*/
+	max-width: 600px;
+	margin: 3vh 3vh;
+  flex: 0 0 100%;  /* adding "flex: 0 0 91.666667%;" allows the box to shrink to 91.6666667% of its size -- can also add ".col-11" to HTML class instead */
+  padding: 0 15px; /* (1) top&bottom padding (2) left&right padding*/
+}
+
+#ContBox {
+	min-height: 590px;
+  margin-top: 1rem !important;
+  flex: 0 0 100%;
+  max-width: 100%;  
+  padding: 0 15px; /* (1) top&bottom padding (2) left&right padding*/
+
+}
+
+#Stage {
+  /* display: -ms-flexbox;
+   display: flex; 
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; */
+}
+
+body {
+  background-color: #22477a;
+	/* other candidates:#FBFBFF #DDE2E3, #ebebec  #F4EDED*/
+}
+
+#SkipF {
+	color: #FFFFFF;
+  }
+
+#Bottom {
+  display: flex;
+	margin-bottom: 10px
+  }
+
+
+/*------------------- DESIGN FOR WARN TEXT ------------------- */
+.text-w{
+color:#4358ae;
+}
+
+/*-------------------  DESIGN FOR INTRODUCTION ------------------- */
+.imageInstruction {
+text-align:center;
+}
+.titleInstruction {
+font-size: 1.8rem;
+font-weight:600;
+list-style-type:none;
+}
+
+.formCSS {
+margin: auto;
+}
+
+.errorText{
+color: red;
+}
+
+/* ---------------- LEARNING TASK: include room for images, cues, and feedback --------------- */
+
+.LTGrid {
+display:grid;
+grid-template-columns: 80px 190px 80px;
+grid-template-rows: 190px 80px 190px 80px; /*190px 75px 190px 75px;*/
+gap: 7px;
+}
+/* box for key-response contingency image, left side  */
+#LTcue0 {  
+grid-column: 1;
+grid-row: 1/4;
+}
+/* box for stimulus 0       padding: 10px 0;*/
+#LTresp0 { 
+grid-column: 2;
+grid-row: 1;
+border: 10px solid; 
+border-color: transparent;
+padding: 10px
+}
+
+/* box for feedback for stimulus 0 */
+#LTfdb0 {
+grid-column: 2;
+grid-row: 2;
+padding: -15px 20px;
+}
+/* box for stimulus 1       padding: 10px 10px 10px 10px;*/
+#LTresp1 {
+grid-column: 2;
+grid-row: 3;
+border: 10px solid; 
+border-color: transparent;
+padding: 10px
+}
+/* box for feedback for stimulus 1 */
+#LTfdb1 {
+grid-column: 2;
+grid-row: 4;
+}
+/* box for key-response contingency image, right side */
+#LTcue1 {
+grid-column: 3;
+grid-row: 1/4;
+}
+
+#LTblock {
+grid-column: 1/3;
+grid-row: 1/3;
+}
+
+#ContinueButton1 {
+padding-bottom: 1em;
+}
+
+#LTchangeBlock {  
+grid-column: 1/4;
+grid-row: 1/4;
+}
+
+#LTchangeBlock_btn {  
+grid-column: 2;
+grid-row: 4;
+text-align: center;
+}
+
+/* for feedback boxes - boxes 3 and 5 */
+.fdb {
+padding: 0px 5px;
+}
+
+/* text/numerical feedbacl */
+#fdb_num {
+text-align: center;
+font-size: 2.5em; /*2.3em*/
+}
+
+/* stimuli image */
+.stim_img {
+width: 100%; /* size is fixed by grid dimensions. cf. LTGrid */
+height: 100%; /* size is fixed by grid dimensions. cf. LTGrid */
+position: relative;
+border:2px solid #606060;
+}
+
+/* money feedback image */
+.money_img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+span img{
+  width: 100%;
+  cursor: pointer;
+}
+
+.LT_radio_btn_container{
+  left:0;
+  width:100%;
+}
+
+/*-------------------- PAIR CHOICE ---------------------*/
+.PairChoice_Grid {
+display: grid;
+grid-template-columns: 190px 190px;
+grid-template-rows: 410px;
+grid-column-gap: 55px;
+padding-bottom: 40px;
+}
+
+.PairChoice_GridSide {
+display: grid;
+grid-template-columns: 170px;
+grid-template-rows: 170px 50px 170px;
+border: 10px dashed #D3D3D3;
+}
+
+#PairChoiceTitle {
+  display: flex;
+  /*flex-direction: 'row';*/
+  padding: 25px;
+  color: black;
+  font-size: 2em;
+}
+
+/*top boxes*/
+.PairChoice_Box_0 { 
+grid-column: 1;
+grid-row: 1;
+padding: 10px 10px 10px 10px;
+}
+/*bottom boxes*/
+.PairChoice_Box_1 { 
+grid-column: 1;
+grid-row: 3;
+padding: 10px 10px 10px 10px;
+}
+.highlight {
+border: 8px solid rgb(56, 56, 56);
+}
+/*-------------------- BONUS ROUND ---------------------*/
+
+.BonusRound_Grid {
+display: grid;
+grid-template-columns: 170px 170px;
+grid-template-rows: 100px 170px 150px;
+grid-column-gap: 30px;
+}
+#BonusRound_Top {
+grid-column: 1/3;
+grid-row: 1;
+display: flex;
+flex-direction: 'row';
+padding: 25px;
+}
+#BonusRoundImage {
+object-fit: contain;
+}
+#BonusRoundTitle {
+color: black;
+font-size: 2em;
+white-space: pre; /* so that the extra white spaces entered in input appear in final result*/
+}
+#BonusRound_resp0 {
+grid-column: 1;
+grid-row: 2;
+border: 10px solid; 
+border-color: transparent;
+}
+#BonusRound_resp1 {
+grid-column: 2;
+grid-row: 2;
+border: 10px solid; 
+border-color: transparent;
+}
+#BonusRound_fdb {
+grid-column: 1/3;
+grid-row: 3;
+}
+
+/*-------------------- SYMBOL CHOICE ---------------------*/
+
+.SymbolChoice_Grid {
+display: grid;
+grid-template-columns: 170px 170px;
+grid-template-rows: 40px 170px;
+grid-column-gap: 30px;
+padding: 25px;
+}
+#SymbolChoice_resp0 {
+grid-column: 1;
+grid-row: 2;
+border: 10px solid; 
+border-color: transparent;
+}
+#SymbolChoice_resp1 {
+grid-column: 2;
+grid-row: 2;
+border: 10px solid; 
+border-color: transparent;
+}
+
+/*-------------------- QUIZZES ---------------------*/
+.quiz_textbox{
+text-align:center;
+}
+
+.LTQuiz{
+margin-top:20px;
+}
+
+.PCquiz_Grid_2 {
+display: grid;
+grid-template-columns: 11em 11em 11em;
+padding-bottom: 20px;
+}
+
+#PCquiz_Grid_2_1{
+grid-column: 1;
+grid-row: 1;
+}
+
+#PCquiz_Grid_2_2{
+grid-column: 2;
+grid-row: 1;
+}
+
+#PCquiz_Grid_2_3{
+grid-column: 3;
+grid-row: 1;
+}
+
+/*
+.PCquiz_img2 {
+max-width: 16em;
+max-height: 16em;
+}
+*/
+
+.PCquiz_img1 {
+max-height: 16em;
+}
+
+.img-fluid{
+  max-height: 30em; /*25em; */
+  max-width: 100%;
+
+}
+
+
+
+/* --------------------   QUESTIONNAIRES -------------------- */
+
+#questionnaire_box {
+display: flex;
+flex-direction: column;
+}
+
+/*-------------------- TRANSFER TASK ---------------------*/
+
+.TransferTask_Grid {
+  display: grid;
+  grid-template-columns: 190px 190px;
+  grid-template-rows: 190px;
+  grid-column-gap: 55px;
+  padding: 40px;
+  justify-content: center;
+}
+
+#TransferTask_resp0 {
+  grid-column: 1;
+  grid-row: 1;
+  border: 10px solid; 
+  border-color: transparent;
+  padding: 10px;
+}
+
+#TransferTask_resp1 {
+  grid-column: 2;
+  grid-row: 1;
+  border: 10px solid; 
+  border-color: transparent;
+  padding: 10px;
+}
+
+/* Stimuli images in Transfer Task use same styling as Learning Task */
+.TransferTask_Grid .stim_img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 2px solid #606060;
+}

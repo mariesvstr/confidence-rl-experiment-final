@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>RL Experiment</title>
+    <link rel="shortcut icon" href="images/favicon-ens.png" type="image/x-icon">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS - formats for phones -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- underscore - useful functions -->
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+    
+    <!-- CSS - Experiment -->
+    <link rel='stylesheet' type='text/css' href='css/main.css' media="screen"/>
+    <!-- CSS - Confidence Scale -->
+    <link rel='stylesheet' type='text/css' href='css/confidence_scale.css' media="screen"/>
+
+
+    <!-- JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- Scripts for Sliders -->
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <!-- Firebase SDK (NOUVEAU) -->
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+      import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+      console.log('✅ Firebase SDK loaded');
+    </script>
+
+    <!-- Script for the experiment  -->
+    <script type="module" src="js/Main.js"></script>
+
+    <!-- Script for dragging-->
+    <!--<script src="js/functions/drag.js"></script>-->
+
+
+  </head>
+  <body>
+
+      <div class ='container' id = 'Main' style="">
+        <div class = 'row justify-content-center'>
+          <div class = 'col-11 rounded shadow' id = 'Cont'>
+            <div class = 'row justify-content-right' id = 'SkipF'></div>
+            <div class = 'row justify-content-center' id = 'Top'></div>
+            <div class = 'row justify-content-center' id = 'Cont2_row'> </div>
+              <div class = 'col-12 mt-3' id='ContBox'>
+                <div class = 'row justify-content-center' id = 'Stage'>  <h3><br> LOADING... <h3>  </div>
+              </div>
+            <div class = 'row justify-content-between' id = 'Bottom'></div>
+            <div class = 'row justify-content-between' id = 'Line'></div>
+          </div>
+        </div>
+      </div>
+
+  </body>
+</html>
