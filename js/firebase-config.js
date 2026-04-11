@@ -18,4 +18,21 @@ const db = getFirestore(app);
 
 console.log('✅ Firebase initialized successfully');
 
-export { db, firebaseConfig };
+// Fonction pour sauvegarder des données dans Firestore
+export async function sendToFirebase(collectionName, data) {
+    try {
+        const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+        
+        const docRef = await addDoc(collection(db, collectionName), {
+            ...data,
+            timestamp: serverTimestamp()
+        });
+        
+        return { success: true, id: docRef.id };
+    } catch (error) {
+        console.error('Firebase write error:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+export { db, firebaseConfig, sendToFirebase };
