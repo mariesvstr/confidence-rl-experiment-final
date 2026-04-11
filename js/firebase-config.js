@@ -35,4 +35,4 @@ export async function sendToFirebase(collectionName, data) {
     }
 }
 
-export { db, firebaseConfig, sendToFirebase };
+export { db, firebaseConfig };
