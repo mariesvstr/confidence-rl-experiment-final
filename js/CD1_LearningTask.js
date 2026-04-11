@@ -19,7 +19,7 @@ let CD1_LearningTask = {
     // -------------------- TASK-LEVEL SETTINGS --------------------
     settings: { 
       task_name: 'LearningTask',
-      n_trials_per_pair_by_session: [1, 1, 1], // practice: 10, real1: 12, real2: 12
+      n_trials_per_pair_by_session: [10, 12, 12], // practice: 10, real1: 12, real2: 12
       n_sessions: 3, // 0 = practice, 1-2 = real tasks
       max_response_time_MS: 3000,
       feedback_time_MS: 2000,
@@ -1216,7 +1216,7 @@ window.displayMPLotterySummary = function(exp) {
     let html = `
         <div class="mp-lottery-container" style="max-width: 900px; margin: 50px auto; padding: 40px; background-color: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
             <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px; font-size: 28px;">
-                🎲 Confidence Lottery Results
+                Confidence Lottery Results
             </h2>
             
             <p style="font-size: 17px; margin-bottom: 40px; text-align: center; color: #555;">
