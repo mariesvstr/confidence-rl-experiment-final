@@ -38,7 +38,7 @@ function check_performance_after_practice(exp) {
   let link = "";
 
   // ------ Display different messages based on value of pcorrect ------
-  if (exp.pcorrect_LearningTask <=-5) { 
+  if (exp.pcorrect_LearningTask <=0.598) { 
     // EXCLUSION: Participant must terminate the experiment
     console.log(' Performance below threshold - EXCLUSION');
     
@@ -95,7 +95,7 @@ function check_performance_after_practice(exp) {
   $("#Stage").html(`<div class="row justify-content-center">${main_text}</div>`);
   
   // Add button
-  if (exp.pcorrect_LearningTask <=-5) {
+  if (exp.pcorrect_LearningTask <=0.598) {
     // EXCLUSION: Button to return to Prolific (or close window in test mode)
     let button_html = '';
     if (exp.test_mode_do_NOT_send_data === 1) {
