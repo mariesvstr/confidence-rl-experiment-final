@@ -1112,23 +1112,22 @@ window.displaySessionPerformanceSummary = function(exp) {
     
     // Afficher chaque session
     const sessions = [
-        { name: 'Session 1', points: session1_points, color: '#3498db' },
-        { name: 'Session 2', points: session2_points, color: '#9b59b6' },
-        { name: 'Transfer Task', points: transfer_points, color: '#e67e22' }
-    ];
-    
-    sessions.forEach(session => {
-        html += `
-            <div style="background: white; border-radius: 12px; padding: 25px; 
-                        margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                        border-left: 5px solid ${session.color};">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <span style="font-size: 24px; margin-right: 10px;">${session.icon}</span>
-                        <span style="font-size: 20px; font-weight: 600; color: #2c3e50;">
-                            ${session.name}
-                        </span>
-                    </div>
+    { name: 'Session 1', points: session1_points, color: '#3498db' },
+    { name: 'Session 2', points: session2_points, color: '#9b59b6' },
+    { name: 'Transfer Task', points: transfer_points, color: '#e67e22' }
+];
+
+sessions.forEach(session => {
+    html += `
+        <div style="background: white; border-radius: 12px; padding: 25px; 
+                    margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    border-left: 5px solid ${session.color};">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 20px; font-weight: 600; color: #2c3e50;">
+                        ${session.name}
+                    </span>
+                </div>
                     <div style="font-size: 28px; font-weight: bold; color: ${session.points >= 0 ? '#27ae60' : '#e74c3c'};">
                         ${session.points >= 0 ? '+' : ''}${Math.round(session.points * 10) / 10} points
                     </div>
@@ -1232,19 +1231,18 @@ window.displayMPLotterySummary = function(exp) {
         
         realSessionResults.forEach((mpResult, index) => {
             const sessionName = mpResult.session === 1 ? 'Session 1' :
-                               mpResult.session === 2 ? 'Session 2' : 'Transfer Task';
-            
+                       mpResult.session === 2 ? 'Session 2' : 'Transfer Task';
+    
             const color = mpResult.session === 1 ? '#3498db' :
-                         mpResult.session === 2 ? '#9b59b6' : '#e67e22';
-            
+                 mpResult.session === 2 ? '#9b59b6' : '#e67e22';
+    
             const wonBonus = mpResult.mp_bonus > 0;
-            
+    
             html += `
                 <div style="margin-bottom: 30px; padding: 25px; background-color: #f8f9fa; border-left: 6px solid ${color}; border-radius: 8px;">
-                    
+            
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                         <div>
-                            <span style="font-size: 24px; margin-right: 10px;">${icon}</span>
                             <span style="font-size: 22px; font-weight: 600; color: ${color};">
                                 ${sessionName}
                             </span>
