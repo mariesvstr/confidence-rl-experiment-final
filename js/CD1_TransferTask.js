@@ -36,7 +36,7 @@ let CD1_TransferTask = {
   // -------------------- TASK-LEVEL SETTINGS --------------------
   settings: {
     task_name: 'TransferTask',
-    n_trials_per_pair_by_session: [4], // 4 for real experiment
+    n_trials_per_pair_by_session: [2], // 2 for real experiment
     n_sessions: 1,                      // Single session
     stimulus_presentation_time_MS: [2500, 2500], // Same as Learning Task
     mask_time_MS: [0, 0],               // No mask (same as LT)
