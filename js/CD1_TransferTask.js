@@ -6,7 +6,7 @@
 // 
 // Key features:
 // - 28 pairs (4 original + 24 novel combinations)
-// - 4 repetitions per pair = 112 trials total
+// - 1 repetition per pair = 28 trials total
 // - NO feedback provided (to test learning, not enable new learning)
 // - Choices do NOT affect bonus (but participants told to respond as if they do)
 // - Adapted for BEST vs WORST framing
