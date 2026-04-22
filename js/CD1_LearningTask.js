@@ -1,4 +1,4 @@
-// CD1_LearningTask.js - COMPLETE VERSION WITH SEPARATED DISPLAYS
+// CD1_LearningTask.js - COMPLETE VERSION WITH SEPARATED DISPLAYS (NO TRANSFER TASK)
 // console.log('----------------------------------- CD1_LearningTask.js -----------------------------------')
 import {getRandomIntInclusive, makeInvisible, makeVisible, getDate, sleep, openFullscreen} from "./functions/usefulFunctions.js";
 import {sendToDB} from "./functions/sendToDB.js";
@@ -289,7 +289,7 @@ function trialChecks(LT, exp) {
       trial_state_machine(LT, exp);
       
     } else if (LT.session === (LT.settings.n_sessions - 1)) {
-      // END OF LAST REAL SESSION → Apply MP then go to Transfer Task
+      // END OF LAST REAL SESSION → Apply MP then go to Session Performance Summary
       console.log(`Session ${LT.session} complete. Applying MP...`);
       LT.trial_state = "applyMatchingProbability";
       trial_state_machine(LT, exp);
@@ -838,7 +838,7 @@ function applyMatchingProbability(LT, exp) {
   }
 }
 
-// **NEW: Helper function for continuation after MP**
+// **Helper function for continuation after MP**
 function handleMPContinuation(LT, exp) {
   if (LT.session === 0) {
     // After practice MP → Performance check
@@ -847,8 +847,8 @@ function handleMPContinuation(LT, exp) {
       window.LT_continue_from_mp_to_check();
     }
   } else if (LT.session === (LT.settings.n_sessions - 1)) {
-    // After last session → Transfer Task
-    console.log('→ All sessions complete. Moving to Transfer Task (State 7)');
+    // After last session → Session Performance Summary (State 7)
+    console.log('→ All sessions complete. Moving to Session Performance Summary (State 7)');
     exp.experiment_state = 7;
     experiment_state_machine(exp);
   } else {
@@ -880,7 +880,7 @@ function displayMPResult(LT, exp, mp_result) {
   // **Title**
   mpHTML += `<h2 style="text-align: center; color: #2c3e50; margin-bottom: 25px;">Session ${LT.session} - Confidence Bonus</h2>`;
   
-  // **Trial information (simplified bullet points)**
+  // **Trial information**
   mpHTML += '<div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">';
   mpHTML += '<ul style="font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">';
   mpHTML += `<li><strong>Trial selected:</strong> Trial #${mp_result.trial_selected + 1}</li>`;
@@ -889,25 +889,23 @@ function displayMPResult(LT, exp, mp_result) {
   mpHTML += '</ul>';
   mpHTML += '</div>';
   
-  // **System Decision (explanation)**
+  // **System Decision**
   mpHTML += '<div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">';
   mpHTML += '<p style="font-size: 16px; margin: 0;"><strong>System Decision:</strong> ';
   
   if (mp_result.mechanism_type === 'direct') {
-    // p >= r → Direct payment based on correctness
     if (mp_result.was_correct) {
       mpHTML += `Your confidence (${(mp_result.confidence_p * 100).toFixed(0)}%) was higher than the computer's offer (${(mp_result.random_draw_r * 100).toFixed(0)}%). Your choice was checked and was correct.`;
     } else {
       mpHTML += `Your confidence (${(mp_result.confidence_p * 100).toFixed(0)}%) was higher than the computer's offer (${(mp_result.random_draw_r * 100).toFixed(0)}%). Your choice was checked but was incorrect.`;
     }
   } else {
-    // p < r → Lottery
     mpHTML += `The computer gave you the lottery because it offered a better chance (${(mp_result.random_draw_r * 100).toFixed(0)}%) than your own choice (${(mp_result.confidence_p * 100).toFixed(0)}%).`;
   }
   
   mpHTML += '</p></div>';
   
-  // **Result (with colored box)**
+  // **Result**
   mpHTML += '<div style="text-align: center; padding: 25px; border-radius: 8px; ' + 
             (mp_result.mp_bonus > 0 ? 'background-color: #d4edda; border: 2px solid #28a745;' : 'background-color: #f8d7da; border: 2px solid #dc3545;') + '">';
   
@@ -920,7 +918,6 @@ function displayMPResult(LT, exp, mp_result) {
       mpHTML += `Your choice was incorrect. You receive <strong>0 bonus points</strong>.`;
     }
   } else {
-    // Lottery
     if (mp_result.mp_bonus > 0) {
       mpHTML += `The lottery won! You receive <strong>${mp_result.mp_bonus} bonus points</strong>.`;
     } else {
@@ -938,7 +935,7 @@ function displayMPResult(LT, exp, mp_result) {
   
   mpHTML += '</div>';
 
-   // **Practice round reminder (only for Session 0)**
+  // **Practice round reminder (only for Session 0)**
   if (LT.session === 0) {
     mpHTML += '<p style="font-size: 14px; margin-top: 15px; margin-bottom: 0; color: #856404; font-style: italic;">As this is the practice round, your score will be reset before the real sessions.</p>';
   }
@@ -954,7 +951,6 @@ function displayMPResult(LT, exp, mp_result) {
   
   $('#Stage').html(mpHTML);
   
-  // **Button click handler**
   document.getElementById('mp-continue-btn').onclick = function() {
     console.log('MP result acknowledged, continuing...');
     handleMPContinuation(LT, exp);
@@ -1065,12 +1061,12 @@ function changeBlock(LT, exp) {
 }
 
 // ============================================================================
-// **NEW: SEPARATED DISPLAY FUNCTIONS (State 9 & State 10)**
+// **SEPARATED DISPLAY FUNCTIONS (State 7 & State 8)**
 // ============================================================================
 
-// **STATE 9: SESSION PERFORMANCE SUMMARY (Points per session)**
+// **STATE 7: SESSION PERFORMANCE SUMMARY (Points per session)**
 window.displaySessionPerformanceSummary = function(exp) {
-    console.log('--- State 9: Session Performance Summary ---');
+    console.log('--- State 7: Session Performance Summary ---');
     
     // Clear screen
     $('#ContBox').empty();
@@ -1088,10 +1084,9 @@ window.displaySessionPerformanceSummary = function(exp) {
             </p>
     `;
     
-    // Calculer les points pour chaque session depuis MP_results
+    // Calculate points for each session from MP_results
     let session1Result = exp.MP_results.find(r => r.session === 1);
     let session2Result = exp.MP_results.find(r => r.session === 2);
-    let transferResult = exp.MP_results.find(r => r.session === 'transfer');
     
     let starting_bonus = exp.starting_bonus || 20;
     
@@ -1105,29 +1100,23 @@ window.displaySessionPerformanceSummary = function(exp) {
     let session2_end = session2Result ? session2Result.total_after - session2Result.mp_bonus : session2_start;
     let session2_points = session2_end - session2_start;
     
-    // Transfer Task points (should be 0)
-    let transfer_start = session2_end;
-    let transfer_end = transferResult ? transferResult.total_after - transferResult.mp_bonus : transfer_start;
-    let transfer_points = transfer_end - transfer_start;
-    
-    // Afficher chaque session
+    // Display each session
     const sessions = [
-    { name: 'Session 1', points: session1_points, color: '#3498db' },
-    { name: 'Session 2', points: session2_points, color: '#9b59b6' },
-    { name: 'Transfer Task', points: transfer_points, color: '#e67e22' }
-];
+        { name: 'Session 1', points: session1_points, color: '#3498db' },
+        { name: 'Session 2', points: session2_points, color: '#9b59b6' }
+    ];
 
-sessions.forEach(session => {
-    html += `
-        <div style="background: white; border-radius: 12px; padding: 25px; 
-                    margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                    border-left: 5px solid ${session.color};">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <span style="font-size: 20px; font-weight: 600; color: #2c3e50;">
-                        ${session.name}
-                    </span>
-                </div>
+    sessions.forEach(session => {
+        html += `
+            <div style="background: white; border-radius: 12px; padding: 25px; 
+                        margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        border-left: 5px solid ${session.color};">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 20px; font-weight: 600; color: #2c3e50;">
+                            ${session.name}
+                        </span>
+                    </div>
                     <div style="font-size: 28px; font-weight: bold; color: ${session.points >= 0 ? '#27ae60' : '#e74c3c'};">
                         ${session.points >= 0 ? '+' : ''}${Math.round(session.points * 10) / 10} points
                     </div>
@@ -1136,8 +1125,8 @@ sessions.forEach(session => {
         `;
     });
     
-    // Total des points
-    const totalTaskPoints = session1_points + session2_points + transfer_points;
+    // Total points (Session 1 + Session 2 only)
+    const totalTaskPoints = session1_points + session2_points;
     const totalPoints = starting_bonus + totalTaskPoints;
     
     html += `
@@ -1193,19 +1182,19 @@ sessions.forEach(session => {
         $('body').append('<div id="performance-summary-container">' + html + '</div>');
     }
     
-    // Button handler
+    // Button handler → State 8
     $('#continue-to-lottery').on('click', function() {
-        console.log('Moving to MP Lottery Summary (State 10)');
-        exp.experiment_state = 10;
+        console.log('Moving to MP Lottery Summary (State 8)');
+        exp.experiment_state = 8;
         import('./experiment_state_machine.js').then(module => {
             module.experiment_state_machine(exp);
         });
     });
 };
 
-// **STATE 10: MP LOTTERY RESULTS (Lottery results per session)**
+// **STATE 8: MP LOTTERY RESULTS (Lottery results per session)**
 window.displayMPLotterySummary = function(exp) {
-    console.log('--- State 10: MP Lottery Summary ---');
+    console.log('--- State 8: MP Lottery Summary ---');
     
     // Clear screen
     $('#ContBox').empty();
@@ -1223,19 +1212,15 @@ window.displayMPLotterySummary = function(exp) {
             </p>
     `;
     
-    // Afficher les résultats MP de chaque session
+    // Display MP results — real sessions only (no practice, no transfer)
     if (exp.MP_results && exp.MP_results.length > 0) {
         
-        // Filter real sessions only (not practice)
-        let realSessionResults = exp.MP_results.filter(r => r.session !== 0);
+        // Filter: only Session 1 and Session 2 (exclude practice session 0)
+        let realSessionResults = exp.MP_results.filter(r => r.session === 1 || r.session === 2);
         
         realSessionResults.forEach((mpResult, index) => {
-            const sessionName = mpResult.session === 1 ? 'Session 1' :
-                       mpResult.session === 2 ? 'Session 2' : 'Transfer Task';
-    
-            const color = mpResult.session === 1 ? '#3498db' :
-                 mpResult.session === 2 ? '#9b59b6' : '#e67e22';
-    
+            const sessionName = mpResult.session === 1 ? 'Session 1' : 'Session 2';
+            const color = mpResult.session === 1 ? '#3498db' : '#9b59b6';
             const wonBonus = mpResult.mp_bonus > 0;
     
             html += `
@@ -1248,7 +1233,7 @@ window.displayMPLotterySummary = function(exp) {
                             </span>
                         </div>
                         <div style="font-size: 24px;">
-                            ${wonBonus ? ' Won' : 'Lost'}
+                            ${wonBonus ? '✓ Won' : '✗ Lost'}
                         </div>
                     </div>
                     
@@ -1274,7 +1259,7 @@ window.displayMPLotterySummary = function(exp) {
         html += `<p style="text-align: center; color: #e74c3c;">No lottery results available.</p>`;
     }
     
-    // Total bonus MP
+    // Total MP bonus (Session 1 + Session 2 only)
     const totalMPBonus = exp.MP_total_bonus_earned || 0;
     
     html += `
@@ -1316,23 +1301,12 @@ window.displayMPLotterySummary = function(exp) {
         function() { $(this).css('background-color', '#27ae60'); }
     );
     
-    // Button handler
+    // Button handler → State 9 (Demographics)
     $('#continue-to-demographics').on('click', function() {
-        console.log('Moving to Demographics (State 11)');
-        exp.experiment_state = 11;
+        console.log('Moving to Demographics (State 9)');
+        exp.experiment_state = 9;
         import('./experiment_state_machine.js').then(module => {
             module.experiment_state_machine(exp);
         });
     });
-};
-
-// ============================================================================
-// **OLD FUNCTION - KEPT FOR REFERENCE (Can be removed)**
-// ============================================================================
-
-// **NOTE: This function is no longer used - replaced by the separated displays above**
-window.displayAllMPResults = function(exp) {
-  console.log('Warning: displayAllMPResults() is deprecated. Use displaySessionPerformanceSummary() and displayMPLotterySummary() instead.');
-  // Redirect to new separated display
-  window.displaySessionPerformanceSummary(exp);
 };
