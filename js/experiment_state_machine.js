@@ -8,7 +8,7 @@ import {checkCompatibility, getID, displayConsent} from "./start_experiment_func
 import {create_instructions_for_task} from "./Instructions.js";
 import {Quiz_LearningTask} from "./Instructions_quiz.js";
 import {CD1_LearningTask} from "./CD1_LearningTask.js";
-import {CD1_TransferTask} from "./CD1_TransferTask.js";   
+// CD1_TransferTask supprimé
 import {run_demographics_questionnaire} from "./Demographics_questionnaire.js";
 import {endExperiment} from "./endExperiment.js";
 import {check_performance_after_practice} from "./check_performance.js";
@@ -18,7 +18,7 @@ import {check_performance_after_practice} from "./check_performance.js";
 // ============================================================================
 
 /**
- * EXPERIMENT STRUCTURE (UPDATED):
+ * EXPERIMENT STRUCTURE (UPDATED - NO TRANSFER TASK):
  *
  * 0. Get participant ID
  * 1. Consent
@@ -27,12 +27,10 @@ import {check_performance_after_practice} from "./check_performance.js";
  * 4. Learning Task practice (with MP display)
  * 5. Performance check
  * 6. Learning Task real sessions (Session 1 & 2 - MP calculated silently)
- * 7. Transfer Task instructions
- * 8. Transfer Task
- * 9. Session Performance Summary (NEW - points earned per session)
- * 10. MP Lottery Results (NEW - lottery results separated)
- * 11. Demographics
- * 12. End experiment
+ * 7. Session Performance Summary
+ * 8. MP Lottery Results
+ * 9. Demographics
+ * 10. End experiment
  */
 
 function experiment_state_machine(exp) {
@@ -46,12 +44,9 @@ function experiment_state_machine(exp) {
     // =========================================================
     case 0:
       console.log(' State 0: Participant ID');
-
-      // **NOUVEAU : Toujours générer un ID automatique (pas de demande manuelle)**
       exp.prolific_ID = "PARTICIPANT_" + Date.now();
       exp.manual_ID = exp.prolific_ID;
       console.log('✓ Participant ID generated:', exp.prolific_ID);
-  
       exp.experiment_state = 1;
       experiment_state_machine(exp);
       break;
@@ -70,7 +65,6 @@ function experiment_state_machine(exp) {
     case 2:
       console.log('State 2: LT Instructions');
       exp.date_start_LearningTask_Instructions = new Date();
-
       let Instructions_LearningTask = create_instructions_for_task(exp, 'LearningTask');
       Instructions_LearningTask.init(exp);
       break;
@@ -105,88 +99,56 @@ function experiment_state_machine(exp) {
     // =========================================================
     case 6:
       console.log('State 6: Starting LT Real Sessions');
-  
-      // After performance check, we need to continue with Session 1
-      // The continuation function should already be set up
       if (window.LT_continue_after_check) {
         console.log('→ Calling LT_continue_after_check() to start Session 1');
         window.LT_continue_after_check();
       } else {
         console.error('State 6: No continuation function found');
-        console.log('This means changeBlock was not properly set up after practice');
       }
       break;
 
     // =========================================================
-    // STATE 7: TRANSFER TASK INSTRUCTIONS
+    // STATE 7: SESSION PERFORMANCE SUMMARY (était State 9)
     // =========================================================
     case 7:
-      console.log('State 7: Transfer Task Instructions');
-      exp.date_start_TransferTask_Instructions = new Date();
-      
-      let Instructions_TransferTask = create_instructions_for_task(exp, 'TransferTask');
-      Instructions_TransferTask.init(exp);
-      break;
-
-    // =========================================================
-    // STATE 8: TRANSFER TASK
-    // =========================================================
-    case 8:
-      console.log('State 8: Transfer Task');
-      exp.date_start_TransferTask = new Date();
-      CD1_TransferTask.init(exp);
-      break;
-
-    // =========================================================
-    // STATE 9: SESSION PERFORMANCE SUMMARY (NEW)
-    // =========================================================
-    case 9:
-      console.log('State 9: Session Performance Summary');
-      console.log('Displaying points earned in each session');
-      
-      // Call the performance summary function
+      console.log('State 7: Session Performance Summary');
       if (window.displaySessionPerformanceSummary) {
         window.displaySessionPerformanceSummary(exp);
       } else {
         console.error('ERROR: displaySessionPerformanceSummary function not found!');
-        console.log('Skipping to MP Lottery Summary...');
-        exp.experiment_state = 10;
+        exp.experiment_state = 8;
         experiment_state_machine(exp);
       }
       break;
 
     // =========================================================
-    // STATE 10: MP LOTTERY RESULTS (NEW)
+    // STATE 8: MP LOTTERY RESULTS (était State 10)
     // =========================================================
-    case 10:
-      console.log('State 10: MP Lottery Results');
-      console.log('Displaying lottery results from Session 1, Session 2, and Transfer Task');
-      
-      // Call the MP lottery summary function
+    case 8:
+      console.log('State 8: MP Lottery Results');
       if (window.displayMPLotterySummary) {
         window.displayMPLotterySummary(exp);
       } else {
         console.error('ERROR: displayMPLotterySummary function not found!');
-        console.log('Skipping to Demographics...');
-        exp.experiment_state = 11;
+        exp.experiment_state = 9;
         experiment_state_machine(exp);
       }
       break;
 
     // =========================================================
-    // STATE 11: DEMOGRAPHICS (was State 10)
+    // STATE 9: DEMOGRAPHICS (était State 11)
     // =========================================================
-    case 11:
-      console.log('State 11: Demographics');
+    case 9:
+      console.log('State 9: Demographics');
       exp.date_start_Demographics = new Date();
       run_demographics_questionnaire(exp);
       break;
 
     // =========================================================
-    // STATE 12: END (was State 11)
+    // STATE 10: END (était State 12)
     // =========================================================
-    case 12:
-      console.log('State 12: End Experiment');
+    case 10:
+      console.log('State 10: End Experiment');
       exp.date_end = new Date();
       exp.bonus_UK_pounds = exp.total_reward * exp.rate;
       endExperiment.init(exp);
