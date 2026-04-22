@@ -32,11 +32,6 @@ let startExperiment = {
                     '<p> - The data collected are anonymous: the researcher in charge of this study has access only to behavioral data (choices, evaluations, etc.), and has no access to your personal data (name, contact, etc.)</p>'+
                     '<p> - Anonymized behavioral data (choices, evaluations, etc.) will initially be used in this research program by the researchers involved in the study. The data will then be archived on a public website and made freely available to the international scientific community without restrictions, to allow other researchers to replicate our analyses and/or reuse the data in their own research.</p>'+
                     // paragraph 4
-                    '<h3> Research Results And Publication </h3>'+ 
-                    '<p> You will be able to check the publications resulting from this study on the following link: </p>'+
-                    '<a href="' + 'https://sites.google.com/site/maellebreton/home/publications' + 
-                    'target="_blank">https://sites.google.com/site/maellebreton/home/publications</a></p>'+
-                    // paragraph 5
                     '<h3> Contact And Additional Information </h3>'+ 
                     '<p>Email: mariesvstr@gmail.com</p>'+
                     '<p>Your participation in this research confirms that you have read this information and wish to participate in the research study.</p>'
