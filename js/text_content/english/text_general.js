@@ -23,7 +23,7 @@ let startExperiment = {
                     '<p> The purpose of this study is to provide a better understanding of how we learn, through trial and error, to maximize our gains and minimize our losses, based on the information we receive about the outcomes of our choices. </p>'+ 
                     // paragraph 2
                     '<h3>Procedure</h3>'+ 
-                    '<p>During your participation in this study, we will ask you to answer several simple questionnaires and tests, which do not require any particular competence. Your internet-based participation will require approximately 40 minutes.</p>'+ 
+                    '<p>During your participation in this study, we will ask you to answer several simple questionnaires and tests, which do not require any particular competence. Your internet-based participation will require approximately 25 minutes.</p>'+ 
                     // paragraph 3
                     '<h3>Voluntary Participation And Confidentiality</h3>'+ 
                     '<p> - These tests do not put you in any particular danger, and there are no side effects.</p>'+
