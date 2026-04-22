@@ -14,10 +14,6 @@ import {text_LT_WORST} from "./text_content/english/text_LT_WORST.js";
 // Import des textes pour les questions de confiance
 import {text_confidence_BEST, text_confidence_WORST} from "./text_content/english/text_confidence.js";
 
-// Import des textes pour la Transfer Task
-import {text_TransferTask_BEST} from "./text_content/english/text_TransferTask_BEST.js";
-import {text_TransferTask_WORST} from "./text_content/english/text_TransferTask_WORST.js";
-
 // ============================================================================
 // CONFIGURATION DE L'EXPÉRIENCE
 // ============================================================================
@@ -91,12 +87,7 @@ var exp = {
     text_confidence_BEST: text_confidence_BEST,
     text_confidence_WORST: text_confidence_WORST,
     text_confidence_current: null,  // sera assigné selon le framing
-    
-    // Textes de la Transfer Task (assignés selon le framing)
-    text_TransferTask_BEST: text_TransferTask_BEST,
-    text_TransferTask_WORST: text_TransferTask_WORST,
-    text_TransferTask_current: null,  // sera assigné selon le framing
-    
+
     language: 'english',
     
     // -------------- IDENTIFIANTS PARTICIPANT --------------
@@ -117,7 +108,6 @@ var exp = {
     
     date_start: 6666,
     date_start_LearningTask: 6666,
-    date_start_TransferTask: 6666,
     date_start_Demographics: 6666,
     date_end: 6666,
     
@@ -132,8 +122,7 @@ var exp = {
     n_correct_choices: 0,          // Nombre de choix objectivement corrects
     pcorrect_LearningTask: 0,      // Pourcentage de choix corrects
     
-    // Variables pour Transfer Task
-    symbols_used_in_LearningTask: {},  // Symboles à réutiliser dans Transfer Task
+    symbols_used_in_LearningTask: {},  
     
     // -------------- ÉTAT DE L'EXPÉRIENCE --------------
     
@@ -170,14 +159,12 @@ window.onload = setTimeout(function() {
         exp.exp_ID = 'cd1_replication_2025_BEST';
         exp.text_LT_current = exp.text_LT_BEST;
         exp.text_confidence_current = exp.text_confidence_BEST;
-        exp.text_TransferTask_current = exp.text_TransferTask_BEST;
         console.log('✓ Participant assigned to BEST group (choose the best option)');
     } else {
         // Groupe WORST (framing inversé)
         exp.exp_ID = 'cd1_replication_2025_WORST';
         exp.text_LT_current = exp.text_LT_WORST;
         exp.text_confidence_current = exp.text_confidence_WORST;
-        exp.text_TransferTask_current = exp.text_TransferTask_WORST;
         console.log('✓ Participant assigned to WORST group (avoid the worst option)');
     }
     
