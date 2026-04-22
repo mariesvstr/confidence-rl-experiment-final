@@ -42,16 +42,6 @@ function create_instructions_for_task(exp, task_name){
       text_button_back: exp.text_buttons.back, 
       text_button_start: exp.text_buttons.start
     });
-  } else if (task_name == "TransferTask") {
-    // Transfer Task instructions
-    var text_TransferTask_instructions = exp.text_TransferTask_current.text_instructions;
-    
-    task_instructions_object = new Instructions({
-      text_instructions: text_TransferTask_instructions, 
-      text_button_next: exp.text_buttons.next, 
-      text_button_back: exp.text_buttons.back, 
-      text_button_start: exp.text_buttons.start
-    });
   } else {
     console.log('The task name "' + task_name + '" is not associated with a set of instructions yet. Check the spelling?');
   }
@@ -60,7 +50,6 @@ function create_instructions_for_task(exp, task_name){
 }
 
 export {create_instructions_for_task}
-
 
 
 // ---------------------------- helper functions ----------------------------
