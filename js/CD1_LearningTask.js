@@ -1076,7 +1076,7 @@ window.displaySessionPerformanceSummary = function(exp) {
     let html = `
         <div class="performance-summary-container" style="max-width: 800px; margin: 50px auto; padding: 40px; background-color: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
             <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px; font-size: 28px;">
-                📊 Session Performance Summary
+                Session Performance Summary
             </h2>
             
             <p style="text-align: center; font-size: 18px; margin-bottom: 40px; color: #555;">
