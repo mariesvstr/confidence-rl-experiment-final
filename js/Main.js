@@ -148,8 +148,8 @@ window.onload = setTimeout(function() {
         console.log('🔧 Framing set via URL parameter:', exp.framing);
     } else {
         // Sinon, assignation aléatoire 50/50 pour test local
-        exp.framing = Math.random() < 0.5 ? 0 : 1;
-        console.log('🎲 Framing randomly assigned:', exp.framing);
+        exp.framing = 0;
+        console.log('Framing forced to WORST (rebalancing):', exp.framing);
     }
     
     // -------------- CONFIGURATION SELON LE FRAMING --------------
